@@ -12,7 +12,10 @@ public class LinearLayout implements XHTMLFragment {
 		super();
 		this.fragments = fragments;
 	}
-
+	public LinearLayout(ArrayList<? extends XHTMLFragment> fragments) {
+		super();
+		this.fragments = fragments.toArray(new XHTMLFragment[0]);
+	}
 
 	@Override
 	public String getXHTML() {
