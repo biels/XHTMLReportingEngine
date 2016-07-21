@@ -36,7 +36,7 @@ publishing {
         mavenJava(MavenPublication) {
             groupId 'com.biel.xre'
             artifactId 'XHTMLReportingEngine'
-            version '1.1'
+            version '1.0.0'
 
             from components.java
         }
