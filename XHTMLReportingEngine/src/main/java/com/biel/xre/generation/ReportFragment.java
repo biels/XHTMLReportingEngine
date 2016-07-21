@@ -1,5 +1,8 @@
 package com.biel.xre.generation;
 
-public abstract class ReportFragment {
-	public abstract String getXHTML();
+/**
+ * Represents a fragment of an XHTML report.
+ */
+public abstract class ReportFragment implements XHTMLFragment {
+	
 }
