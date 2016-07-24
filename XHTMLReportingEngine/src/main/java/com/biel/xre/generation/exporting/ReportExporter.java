@@ -21,6 +21,7 @@ public abstract class ReportExporter {
 		l.debug("ReportExporter for report {} is ready", report.getClass().getName());
 	}
 	public void export(File dir, String fileName){
+		l.trace("Using export(File dir, String fileName) to export {}", fileName);
 		if(!dir.exists())dir.mkdir();
 		File file = new File(dir.getPath() + File.separator + fileName);
 		export(file);
