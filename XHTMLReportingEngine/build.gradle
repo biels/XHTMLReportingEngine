@@ -42,3 +42,5 @@ publishing {
         }
     }
 }
+
+publishToMavenLocal.group = "publishing"
