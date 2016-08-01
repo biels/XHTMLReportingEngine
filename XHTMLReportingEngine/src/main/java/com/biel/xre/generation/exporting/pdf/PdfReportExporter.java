@@ -18,51 +18,60 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
 public class PdfReportExporter extends ReportExporter {
-	
+
 	final Logger l = LoggerFactory.getLogger(ReportExporter.class);
-	
+
 	public PdfReportExporter(Report report) {
 		super(report);
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
-	public void export(File output) {
-		generatePdf(output);
+	protected boolean generateFile(File file) {
+		Document document = new Document(PageSize.A4);
+		PdfWriter pdfWriter = null;
+		try {
+			file.createNewFile();
+		} catch (IOException e1) {
+			l.error("Error creating new file  at " + file.getAbsolutePath());
+			e1.printStackTrace();
+		}
+		try {
+			FileOutputStream os = new FileOutputStream(file);
+			pdfWriter = PdfWriter.getInstance(document, os);
+			try {
+				generateDocument(pdfWriter, document, xhtml);
+				os.close();
+				return true;
+			} catch (IOException e) {
+				l.error("IOException while generating pdf document");
+				e.printStackTrace();
+			}
+			try {
+				os.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (DocumentException e) {
+			l.error("DocumentException while generating pdf document");
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
 
 	}
-	
-	public File generatePdf(File file) {
-        Document document = new Document(PageSize.A4);
-
-        PdfWriter pdfWriter = null;
-        try {
-            pdfWriter = PdfWriter.getInstance(document, new FileOutputStream(file));
-            try {
-                generateDocument(pdfWriter, document, xhtml);
-                return file;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-       return null;
-
-    }
-    protected void generateDocument(PdfWriter pdfWriter,Document document, String xml) throws IOException {
-        document.open();
-        document.addAuthor("Author");
-        document.addCreator("Creator");
-        document.addTitle("Title");
-        document.addCreationDate();
-        document.addSubject("Subject");
-        XMLWorkerHelper xmlWorkerHelper = XMLWorkerHelper.getInstance();
-        xmlWorkerHelper.parseXHtml(pdfWriter, document, new StringReader(xml));
-        document.close();
-        l.debug("Document generated using XHTML");
-    }
+	protected void generateDocument(PdfWriter pdfWriter,Document document, String xml) throws IOException {
+		document.open();
+		document.addAuthor("Author");
+		document.addCreator("Creator");
+		document.addTitle("Title");
+		document.addCreationDate();
+		document.addSubject("Subject");
+		XMLWorkerHelper xmlWorkerHelper = XMLWorkerHelper.getInstance();
+		xmlWorkerHelper.parseXHtml(pdfWriter, document, new StringReader(xml));
+		document.close();
+		l.debug("Document generated using XHTML");
+	}
 
 }

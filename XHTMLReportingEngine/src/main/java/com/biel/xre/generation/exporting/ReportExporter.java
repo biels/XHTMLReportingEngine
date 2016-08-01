@@ -36,7 +36,8 @@ public abstract class ReportExporter {
 			l.debug("Creating export directory tree to place file " + parentFile.getAbsolutePath());
 			parentFile.mkdirs();
 		}
-		generateFile(output);
+		boolean result = generateFile(output);
+		l.info("File " + output.getPath() + " "  + (result ?  "generated correctly" : "could not be generated"));
 	}
-	protected abstract void generateFile(File file);
+	protected abstract boolean generateFile(File file);
 }
