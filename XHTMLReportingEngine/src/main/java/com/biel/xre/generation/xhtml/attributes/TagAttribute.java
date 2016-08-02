@@ -11,6 +11,6 @@ public abstract class TagAttribute {
 	public abstract String getAttributeName();
 	public String getAttributeString(){
 		if(value.isEmpty())return "";
-		return MessageFormat.format("id=\"{0}\"", value);
+		return MessageFormat.format("{0}=\"{1}\"", getAttributeName(), value);
 	}
 }

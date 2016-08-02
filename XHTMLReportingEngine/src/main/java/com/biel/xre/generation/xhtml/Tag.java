@@ -31,7 +31,7 @@ public class Tag implements XHTMLFragment {
 
 	@Override
 	public String getXHTML() {
-		String s = (attributes == null ? "" : " " + attributes.getTagAttributes());
+		String s = (attributes == null ? "" : " " + attributes.getAttributeString());
 		return MessageFormat.format("<{0}{1}>{2}</{0}>", name, s, content.getXHTML());
 	}
 

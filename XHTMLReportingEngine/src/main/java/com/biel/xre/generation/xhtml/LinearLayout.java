@@ -2,22 +2,29 @@ package com.biel.xre.generation.xhtml;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
 import com.biel.xre.generation.XHTMLFragment;
 
 public class LinearLayout implements XHTMLFragment {
-	ArrayList<? extends XHTMLFragment> fragments;
+	ArrayList<XHTMLFragment> fragments;
 	
 	
 	public LinearLayout(XHTMLFragment... fragments) {
 		super();
 		this.fragments = new ArrayList<XHTMLFragment>(Arrays.asList(fragments));
 	}
+	@SuppressWarnings("unchecked")
 	public LinearLayout(ArrayList<? extends XHTMLFragment> fragments) {
 		super();
-		this.fragments = fragments;
+		this.fragments = (ArrayList<XHTMLFragment>) fragments;
 	}
-
+	public void add(XHTMLFragment... fragments) {
+		this.fragments.addAll(Arrays.asList(fragments));
+	}
+	public void add(ArrayList<? extends XHTMLFragment> fragments) {
+		this.fragments.addAll(fragments);
+	}
 	@Override
 	public String getXHTML() {
 		StringBuilder sb = new StringBuilder();
