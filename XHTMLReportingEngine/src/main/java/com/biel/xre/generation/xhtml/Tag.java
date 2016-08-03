@@ -28,7 +28,11 @@ public class Tag implements XHTMLFragment {
 		this.content = content;
 		this.attributes = attributes;
 	}
-
+	public Tag(String name, String content) {
+		super();
+		this.name = name;
+		this.content = new Literal(content);
+	}
 	@Override
 	public String getXHTML() {
 		String s = (attributes == null ? "" : " " + attributes.getAttributeString());

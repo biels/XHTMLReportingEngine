@@ -14,10 +14,10 @@ public abstract class ReportExporter {
 
 	public ReportExporter(Report report) {
 		super();
-		if(report == null)l.error("Tried to create a ReportExporter with a null report");
+		if(report == null){l.error("Tried to create a ReportExporter with a null report"); return;};
 		this.report = report;
 		l.debug("Populating xhtml string...");
-		this.xhtml = report.getXHTML();
+		this.xhtml = report.getFullXHTML();
 		l.debug("ReportExporter for report {} is ready", report.getClass().getName());
 	}
 	public File export(File root, String folder, String fileName){
