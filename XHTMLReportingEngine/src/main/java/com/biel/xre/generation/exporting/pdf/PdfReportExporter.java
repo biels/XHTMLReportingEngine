@@ -9,19 +9,19 @@ import java.io.StringReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.biel.xre.generation.Report;
-import com.biel.xre.generation.exporting.ReportExporter;
+import com.biel.xre.generation.XHTMLReport;
+import com.biel.xre.generation.exporting.XHTMLReportExporter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
-public class PdfReportExporter extends ReportExporter {
+public class PdfReportExporter extends XHTMLReportExporter {
 
-	final Logger l = LoggerFactory.getLogger(ReportExporter.class);
+	final Logger l = LoggerFactory.getLogger(XHTMLReportExporter.class);
 
-	public PdfReportExporter(Report report) {
+	public PdfReportExporter(XHTMLReport report) {
 		super(report);
 		// TODO Auto-generated constructor stub
 	}

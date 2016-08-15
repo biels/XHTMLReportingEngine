@@ -5,14 +5,14 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.biel.xre.generation.Report;
+import com.biel.xre.generation.XHTMLReport;
 
-public abstract class ReportExporter {
-	final Logger l = LoggerFactory.getLogger(ReportExporter.class);
-	protected Report report;
+public abstract class XHTMLReportExporter {
+	final Logger l = LoggerFactory.getLogger(XHTMLReportExporter.class);
+	protected XHTMLReport report;
 	protected String xhtml;
 
-	public ReportExporter(Report report) {
+	public XHTMLReportExporter(XHTMLReport report) {
 		super();
 		if(report == null){l.error("Tried to create a ReportExporter with a null report"); return;};
 		this.report = report;
