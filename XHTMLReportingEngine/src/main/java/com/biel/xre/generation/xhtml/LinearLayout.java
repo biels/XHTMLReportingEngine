@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import com.biel.xre.generation.XHTMLFragment;
 
+import java8.util.J8Arrays;
+
 public class LinearLayout implements XHTMLFragment {
-	ArrayList<XHTMLFragment> fragments;
+	List<XHTMLFragment> fragments;
 	
 	
 	public LinearLayout(XHTMLFragment... fragments) {
@@ -18,7 +21,7 @@ public class LinearLayout implements XHTMLFragment {
 	@SuppressWarnings("unchecked")
 	public LinearLayout(List<? extends XHTMLFragment> fragments) {
 		super();
-		this.fragments = (ArrayList<XHTMLFragment>) fragments;
+		this.fragments = (List<XHTMLFragment>) fragments;
 	}
 	public void add(XHTMLFragment... fragments) {
 		this.fragments.addAll(Arrays.asList(fragments));

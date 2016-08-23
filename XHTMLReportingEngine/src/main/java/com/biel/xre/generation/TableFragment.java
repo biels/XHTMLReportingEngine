@@ -7,22 +7,28 @@ import java.util.List;
 import com.biel.xre.generation.xhtml.LinearLayout;
 import com.biel.xre.generation.xhtml.Tag;
 
+import java8.util.J8Arrays;
+import java8.util.stream.Collectors;
+import java8.util.stream.RefStreams;
+import java8.util.stream.StreamSupport;
+
 public class TableFragment extends XHTMLReportFragment {
 	List<TableRow> rows = new ArrayList<>();
+	boolean hasHeader = false;
 	@Override
 	public String getXHTML() {
 		return new Tag("table", new LinearLayout(rows)).getXHTML();
 	}
 	public class TableRow extends XHTMLReportFragment{
-		List<XHTMLFragment> columns = new ArrayList<>();
+		List<TableColumn> columns = new ArrayList<>();
 
 		public TableRow(List<XHTMLFragment> columns) {
 			super();
-			this.columns = columns;
+			this.columns = StreamSupport.stream(columns).map(f -> hasHeader ? new TableColumn(f) : new TableHeaderColumn(f)).collect(Collectors.toList());			
+			hasHeader = true;
 		}
 		public TableRow(XHTMLFragment... columns) {
-			super();
-			this.columns = Arrays.asList(columns);
+			this(Arrays.asList(columns));
 		}
 		@Override
 		public String getXHTML() {
