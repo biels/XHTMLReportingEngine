@@ -9,6 +9,10 @@ public class Literal implements XHTMLFragment {
 		super();
 		this.value = value;
 	}
+	public Literal(int value) {
+		super();
+		this.value = Integer.toString(value);
+	}
 	
 	public Literal(XHTMLFragment value) {
 		super();

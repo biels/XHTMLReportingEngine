@@ -4,6 +4,8 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import com.biel.xre.generation.XHTMLFragment;
+import com.biel.xre.generation.xhtml.attributes.IdAttribute;
+import com.biel.xre.generation.xhtml.attributes.StyleAttribute;
 import com.biel.xre.generation.xhtml.attributes.TagAttributes;
 
 /**
@@ -27,6 +29,18 @@ public class Tag implements XHTMLFragment {
 		this.name = name;
 		this.content = content;
 		this.attributes = attributes;
+	}
+	public Tag(String name, XHTMLFragment content, StyleAttribute style) {
+		super();
+		this.name = name;
+		this.content = content;
+		this.attributes = new TagAttributes(style);
+	}
+	public Tag(String name, XHTMLFragment content, IdAttribute id) {
+		super();
+		this.name = name;
+		this.content = content;
+		this.attributes = new TagAttributes(id);
 	}
 	public Tag(String name, String content) {
 		super();
