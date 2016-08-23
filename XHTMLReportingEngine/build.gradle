@@ -7,10 +7,21 @@
  * user guide available at https://docs.gradle.org/2.13/userguide/tutorial_java_projects.html
  */
 
+buildscript {
+  repositories {
+     mavenCentral()
+  }
+
+  dependencies {
+     classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+  }
+}
+
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'me.tatarka.retrolambda'
 
 // In this section you declare where to find the dependencies of your project
 repositories {
@@ -31,6 +42,11 @@ dependencies {
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
 
+	compile 'net.sourceforge.streamsupport:streamsupport:1.5.1'
+    compile 'net.sourceforge.streamsupport:streamsupport-cfuture:1.5.1'
+    compile 'net.sourceforge.streamsupport:streamsupport-atomic:1.5.1'
+    compile 'net.sourceforge.streamsupport:streamsupport-flow:1.5.1'
+    compile 'net.sourceforge.streamsupport:streamsupport-literal:1.5.1'
 }
 
 publishing {
@@ -47,6 +63,8 @@ publishing {
 
 publishToMavenLocal.group = "publishing"
 
-def javaVersion = JavaVersion.VERSION_1_7;
+def javaVersion = JavaVersion.VERSION_1_8;
 sourceCompatibility = javaVersion;
 targetCompatibility = javaVersion;
+
+retrolambda.javaVersion JavaVersion.VERSION_1_7
