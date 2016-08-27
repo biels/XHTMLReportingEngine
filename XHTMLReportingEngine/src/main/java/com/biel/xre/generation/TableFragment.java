@@ -8,6 +8,8 @@ import com.biel.xre.generation.xhtml.LinearLayout;
 import com.biel.xre.generation.xhtml.Tag;
 
 import java8.util.J8Arrays;
+import java8.util.function.Consumer;
+import java8.util.function.Function;
 import java8.util.stream.Collectors;
 import java8.util.stream.RefStreams;
 import java8.util.stream.StreamSupport;
@@ -24,7 +26,18 @@ public class TableFragment extends XHTMLReportFragment {
 
 		public TableRow(List<XHTMLFragment> columns) {
 			super();
-			this.columns = StreamSupport.stream(columns).map(f -> hasHeader ? new TableColumn(f) : new TableHeaderColumn(f)).collect(Collectors.toList());			
+			StreamSupport.stream(columns).map(new Function<XHTMLFragment, TableColumn>() {
+				@Override
+				public TableColumn apply(XHTMLFragment t) {
+					// TODO Auto-generated method stub
+					return hasHeader ? new TableColumn(t) : new TableHeaderColumn(t);
+				}
+			}).forEach(new Consumer<TableColumn>() {
+				@Override
+				public void accept(TableColumn t) {
+					TableRow.this.columns.add(t);
+				}
+			});			
 			hasHeader = true;
 		}
 		public TableRow(XHTMLFragment... columns) {
