@@ -2,7 +2,7 @@ package com.biel.xre.generation.xhtml.attributes;
 
 import java.util.ArrayList;
 
-import com.itextpdf.text.List;
+import org.apache.commons.lang.StringUtils;
 
 public class TagAttributes {
 	final TagAttribute[] tagAttributes;
@@ -19,7 +19,6 @@ public class TagAttributes {
 	public String getAttributeString(){
 		ArrayList<String> arrayList = new ArrayList<String>();
 		for(TagAttribute t : tagAttributes)arrayList.add(t.getAttributeString());
-		return String.join(" ", arrayList);
-		//return String.join(" ", tagAttributes);
+		return StringUtils.join(arrayList, " "); // Java 7 compatible
 	}
 }
